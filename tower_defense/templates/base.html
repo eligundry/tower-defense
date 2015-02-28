@@ -1,9 +1,13 @@
 {% load compress %}
+{% load staticfiles %}
 <!doctype html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<title>{% block 'title' %}Tower Defense{% endblock %}</title>
+		{% compress css %}
+			<link rel="stylesheet" type="text/less" href="{% static "project_static/less/bootstrap/bootstrap.less" %}" />
+		{% endcompress %}
 		{% block 'stylesheets' %}
 		{% endblock %}
 	</head>
