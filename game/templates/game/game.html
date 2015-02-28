@@ -1,12 +1,35 @@
 {% extends 'base.html' %}
 
 {% block 'content' %}
+<noscript id="board-json">
+{
+"width": {{ game.width }},
+"height": {{ game.height }},
+"monster": [
+	{% for t in game_tiles %}
+	{
+		"x": {{ t.tile.x_coordinate }},
+		"y": {{ t.tile.y_coordinate }},
+		"cell": {{ t.tile.cell }},
+		"name": "{{ t.monster.first.name }}",
+		"class": "{{ t.monster.first.class_name }}",
+		"hp": {{ t.tilemonster_set.first.hp }},
+		"max_hp": {{ t.monster.first.max_hp }},
+		"movement": {{ t.monster.first.movement_range }},
+		"damage": {{ t.monster.first.damage }}
+	}{% if not forloop.last %},{% endif %}
+	{% endfor %}
+]
+}
+</noscript>
+
 <div class="game-board" data-width="{{ game.width }}" data-height="{{ game.height }}">
 {% for t in game.tiles.all %}
 	{% if t.x_coordinate == 0 %}
 	<div class="game-board-row">
 	{% endif %}
-	<div data-cell="{{ t.cell }}" data-x="{{ t.x_coordinate }}" data-y="{{ t.y_coordinate }}"></div>
+	<div data-cell="{{ t.cell }}" data-x="{{ t.x_coordinate }}" data-y="{{ t.y_coordinate }}">
+	</div>
 	{% if t.x_coordinate == game.width|add:"-1" %}
 	</div>
 	{% endif %}

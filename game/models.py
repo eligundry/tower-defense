@@ -1,4 +1,5 @@
 from django.db import models
+from random import randint
 
 class GameManager(models.Manager):
     def create_game(self, width=10, height=10):
@@ -17,6 +18,27 @@ class Game(models.Model):
     tiles = models.ManyToManyField('Tile', through='GameTile')
 
     objects = GameManager()
+
+    def end(self):
+        from datetime import datetime
+        self.is_active = False
+        self.time_end = datetime.now()
+        self.save()
+
+    def spawn_enemies(self):
+        enemy_count = randint(1, 15)
+        edge_tiles = self.tiles.filter(is_edge=True)
+        monsters = Monster.objects.all()
+
+        for i in range(0, enemy_count):
+            tile = edge_tiles[randint(0, edge_tiles.count())]
+            gametile = tile.gametile_set.first()
+            monster = monsters[randint(0, monsters.count() - 1)]
+            tm = TileMonster(tile=gametile, monster=monster, hp=monster.max_hp)
+            tm.save()
+
+    def move_enemies(self):
+        pass
 
     def add_tiles(self):
         for y in range(0, self.height):
@@ -40,7 +62,7 @@ class GameTile(models.Model):
                                 through_fields=('tile', 'monster'), null=True)
 
     def is_occupied(self):
-        return (self.tower is not null) and (self.monster is not null)
+        return (self.tower is not None) and (self.monster is not None)
 
 class Tile(models.Model):
     x_coordinate = models.IntegerField()

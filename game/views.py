@@ -23,10 +23,12 @@ def new(request):
 
 def resume(request, id):
     game = Game.objects.get(pk=id)
+    active_game_tiles = game.gametile_set.filter(monster__in=range(0, 15))
 
     template = loader.get_template('game/game.html')
     context = RequestContext(request, {
         'game': game,
+        'game_tiles': active_game_tiles,
     })
 
     return HttpResponse(template.render(context))
