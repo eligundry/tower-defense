@@ -29,7 +29,12 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '127.0.0.1:8111',
+    'localhost',
+    'localhost:8111',
+]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -128,15 +133,22 @@ INSTALLED_APPS = (
 
     'compressor',
     'debug_toolbar',
+    'django_extensions',
 
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'game',
 )
 
 EMAIL_SUBJECT_PREFIX = '[tower_defense] '
 
-INTERNAL_IPS = ('127.0.0.1', '10.0.2.2')
+INTERNAL_IPS = (
+    '127.0.0.1',
+    '127.0.0.1:8111',
+    'localhost',
+    'localhost:8111',
+)
 
 # django-debug-toolbar settings
 DEBUG_TOOLBAR_CONFIG = {
