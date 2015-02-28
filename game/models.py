@@ -7,9 +7,16 @@ class Tile(models.Model):
 
 class Tower(models.Model):
     name = models.CharField(max_length=50)
-    hp = models.IntegerField()
+    max_hp = models.IntegerField()
     attack_range = models.IntegerField()
     damage = models.IntegerField(null=True)
+
+class Monster(models.Model):
+    name = models.CharField(max_length=50)
+    class_name = models.CharField(max_length=50)
+    max_hp = models.IntegerField()
+    attack_range = models.IntegerField(null=True)
+    movement_range = models.IntegerField()
 
 class Game(models.Model):
     money_earned = models.IntegerField(default=0)
@@ -24,8 +31,16 @@ class GameTile(models.Model):
     game = models.ForeignKey(Game)
     tile = models.ForeignKey(Tile)
     tower = models.ManyToManyField(Tower, through='TileTower',
-                                   through_fields=('tile', 'tower'))
+                                through_fields=('tile', 'tower'), null=True)
+    monster = models.ManyToManyField(Monster, through='TileMonster',
+                                through_fields=('tile', 'monster'), null=True)
 
 class TileTower(models.Model):
     tile = models.ForeignKey(GameTile)
     tower = models.ForeignKey(Tower)
+    hp = models.IntegerField()
+
+class TileMonster(models.Model):
+    tile = models.ForeignKey(GameTile)
+    monster = models.ForeignKey(Monster)
+    hp = models.IntegerField()
