@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block 'content' %}
-<div class="game-board">
+<div class="game-board" data-width="{{ game.width }}" data-height="{{ game.height }}">
 {% for t in game.tiles.all %}
 	{% if t.x_coordinate == 0 %}
 	<div class="game-board-row">
