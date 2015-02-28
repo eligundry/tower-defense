@@ -11,7 +11,7 @@ class Tile(models.Model):
     is_edge = models.BooleanField(default=False)
 
     def cell(self):
-        return (self.y_coordinate * 10) + x_coordinate
+        return (self.y_coordinate * 10) + self.x_coordinate
 
 class Tower(models.Model):
     name = models.CharField(max_length=50)
