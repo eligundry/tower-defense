@@ -50,6 +50,9 @@ class Tile(models.Model):
     def cell(self):
         return (self.y_coordinate * 10) + self.x_coordinate
 
+    class Meta:
+        ordering = ['y_coordinate', 'x_coordinate']
+
 class Monster(models.Model):
     name = models.CharField(max_length=50)
     class_name = models.CharField(max_length=50)
