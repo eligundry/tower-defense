@@ -3,4 +3,6 @@ from game import views
 
 urlpatterns = patterns('',
     url('^$', views.index),
+    url('^new/$', views.new),
+    url('^(?P<id>)', views.resume),
 )
