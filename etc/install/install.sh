@@ -27,7 +27,7 @@ export LC_ALL=en_GB.UTF-8
 # Install essential packages from Apt
 apt-get update -y
 # Python dev packages
-apt-get install -y build-essential python python-dev
+apt-get install -y build-essential python python-dev libyaml-dev dos2unix
 # python-setuptools being installed manually
 wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -O - | python
 # Dependencies for image processing with Pillow (drop-in replacement for PIL)
@@ -36,6 +36,8 @@ wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -O - | pyth
 apt-get install -y libjpeg-dev libtiff-dev zlib1g-dev libfreetype6-dev liblcms2-dev
 # Git (we'd rather avoid people keeping credentials for git commits in the repo, but sometimes we need it for pip requirements that aren't in PyPI)
 apt-get install -y git
+
+dos2unix /etc/bash.bashrc
 
 # Postgresql
 if ! command -v psql; then
@@ -54,6 +56,7 @@ fi
 
 # bash environment global setup
 cp -p $PROJECT_DIR/etc/install/bashrc /home/vagrant/.bashrc
+dos2unix /home/vagrant/.bashrc
 su - vagrant -c "mkdir -p /home/vagrant/.pip_download_cache"
 
 # Node.js, CoffeeScript and LESS
