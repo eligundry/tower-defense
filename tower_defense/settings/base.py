@@ -113,6 +113,10 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
+CRON_CLASSES = [
+    'game.cron.TriggerActionJob',
+]
+
 ROOT_URLCONF = 'tower_defense.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -134,6 +138,7 @@ INSTALLED_APPS = (
     'compressor',
     'debug_toolbar',
     'django_extensions',
+    'django_cron',
 
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
