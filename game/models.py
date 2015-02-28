@@ -5,10 +5,14 @@ class Tile(models.Model):
     y_coordinate = models.IntegerField()
     is_edge = models.BooleanField(default=False)
 
+    def cell(self):
+        return (self.y_coordinate * 10) + x_coordinate
+
 class Tower(models.Model):
     name = models.CharField(max_length=50)
+    class_name = models.CharField(max_length=50)
     max_hp = models.IntegerField()
-    attack_range = models.IntegerField(null=True)
+    view_range = models.IntegerField(null=True)
     damage = models.IntegerField(null=True)
 
 class Monster(models.Model):
@@ -17,6 +21,7 @@ class Monster(models.Model):
     max_hp = models.IntegerField()
     attack_range = models.IntegerField(null=True)
     movement_range = models.IntegerField()
+    damage = models.IntegerField()
 
 class Game(models.Model):
     money_earned = models.IntegerField(default=0)
@@ -37,10 +42,14 @@ class GameTile(models.Model):
     monster = models.ManyToManyField(Monster, through='TileMonster',
                                 through_fields=('tile', 'monster'), null=True)
 
+    def is_occupied(self):
+        return (self.tower is not null) and (self.monster is not null)
+
 class TileTower(models.Model):
     tile = models.ForeignKey(GameTile)
     tower = models.ForeignKey(Tower)
     hp = models.IntegerField()
+    view_range = models.IntegerField()
 
 class TileMonster(models.Model):
     tile = models.ForeignKey(GameTile)

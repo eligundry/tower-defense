@@ -1,0 +1,60 @@
+- model: game.monster
+  pk: 1
+  fields:
+    name: Brute
+    class_name: brute
+    attack_range: 1
+    movement_range: 1
+    damage: 3
+    max_hp: 30
+
+- model: game.monster
+  pk: 2
+  fields:
+    name: Archer
+    class_name: archer
+    attack_range: 3
+    movement_range: 1
+    damage: 1
+    max_hp: 10
+
+- model: game.monster
+  pk: 3
+  fields:
+    name: Warrior
+    class_name: warrior
+    attack_range: 1
+    movement_range: 3
+    damage: 1
+    max_hp: 20
+
+- model: game.tower
+  pk: 1
+  fields:
+    name: Castle
+    class_name: castle
+    max_hp: 50
+
+- model: game.tower
+  pk: 1
+  fields:
+    name: Castle
+    class_name: castle
+    max_hp: 50
+    view_range: 20
+
+- model: game.tower
+  pk: 2
+  fields:
+    name: Turret
+    class_name: turret
+    max_hp: 10
+    view_range: 5
+    damage: 1
+
+- model: game.tower
+  pk: 3
+  fields:
+    name: Watch Tower
+    max_hp: 20
+    view_range: 10
