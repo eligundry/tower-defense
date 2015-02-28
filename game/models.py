@@ -8,7 +8,7 @@ class Tile(models.Model):
 class Tower(models.Model):
     name = models.CharField(max_length=50)
     max_hp = models.IntegerField()
-    attack_range = models.IntegerField()
+    attack_range = models.IntegerField(null=True)
     damage = models.IntegerField(null=True)
 
 class Monster(models.Model):
@@ -23,6 +23,8 @@ class Game(models.Model):
     money_spent = models.IntegerField(default=0)
     enemies_killed = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
+    width = models.IntegerField(default=100)
+    height = models.IntegerField(default=100)
     time_start = models.DateTimeField(auto_now_add=True)
     time_end = models.DateTimeField(null=True)
     tiles = models.ManyToManyField(Tile, through='GameTile')
