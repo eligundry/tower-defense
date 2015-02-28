@@ -4,6 +4,7 @@ import os
 import sys
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), '..', '..')
+SETTINGS_ROOT = os.path.join(os.path.dirname(__file__), '..')
 
 # Modify sys.path to include the lib directory
 sys.path.append(os.path.join(PROJECT_ROOT, "lib"))
@@ -118,9 +119,8 @@ ROOT_URLCONF = 'tower_defense.urls'
 WSGI_APPLICATION = 'tower_defense.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+        os.path.join(PROJECT_ROOT, 'templates'),
+        os.path.join(SETTINGS_ROOT, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'game',
+    'project_static',
 )
 
 EMAIL_SUBJECT_PREFIX = '[tower_defense] '

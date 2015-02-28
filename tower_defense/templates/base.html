@@ -3,17 +3,17 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>{{ block 'title' }}Tower Defense{{ endblock }}</title>
-		{{ block 'stylesheets' }}
-		{{ endblock }}
+		<title>{% block 'title' %}Tower Defense{% endblock %}</title>
+		{% block 'stylesheets' %}
+		{% endblock %}
 	</head>
 	<body>
 		<main role="content">
-			{{ block 'content' }}
-			{{ endblock }}
+			{% block 'content' %}
+			{% endblock %}
 		</main>
 
-		{{ block 'javascripts' }}
-		{{ endblock }}
+		{% block 'javascripts' %}
+		{% endblock %}
 	</body>
 </html>
