@@ -1,5 +1,10 @@
 from django.db import models
 
+class GameManager(models.Manager):
+    def create_game(self, width=10, height=10):
+        game = self.create(width=width, height=height)
+        return game
+
 class Tile(models.Model):
     x_coordinate = models.IntegerField()
     y_coordinate = models.IntegerField()
@@ -33,6 +38,21 @@ class Game(models.Model):
     time_start = models.DateTimeField(auto_now_add=True)
     time_end = models.DateTimeField(null=True)
     tiles = models.ManyToManyField(Tile, through='GameTile')
+
+    objects = GameManager()
+
+    def add_tiles(self):
+        for y in range(0, self.height):
+            for x in range(0, self.width):
+                tile = Tile()
+                tile.y_coordinate = y
+                tile.x_coordinate = x
+
+                if y == 0 or y == self.height or x == 0 or x == self.width:
+                    tile.is_edge = True
+
+                tile.save()
+                game_tile = GameTile.objects.create(game=self, tile=tile)
 
 class GameTile(models.Model):
     game = models.ForeignKey(Game)
