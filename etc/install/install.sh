@@ -27,7 +27,7 @@ export LC_ALL=en_GB.UTF-8
 # Install essential packages from Apt
 apt-get update -y
 # Python dev packages
-apt-get install -y build-essential python python-dev libyaml-dev dos2unix node-less
+apt-get install -y build-essential python python-dev libyaml-dev dos2unix node-less redis-server
 # python-setuptools being installed manually
 wget https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -O - | python
 # Dependencies for image processing with Pillow (drop-in replacement for PIL)
@@ -58,6 +58,9 @@ fi
 cp -p $PROJECT_DIR/etc/install/bashrc /home/vagrant/.bashrc
 dos2unix /home/vagrant/.bashrc
 su - vagrant -c "mkdir -p /home/vagrant/.pip_download_cache"
+
+# Start redis
+service redis-server start
 
 # ---
 
