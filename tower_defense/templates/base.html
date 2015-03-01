@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<title>{% block 'title' %}Tower Defense{% endblock %}</title>
 	{% compress css %}
-	<link rel="stylesheet" type="text/less" href="/static/project_static/less/bootstrap/bootstrap.less" charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="/static/project_static/css/pure-min.css">
 	{% endcompress %}
 	{% block 'stylesheets' %}{% endblock %}
 </head>
@@ -16,6 +16,11 @@
 		{% endblock %}
 	</main>
 
+	{% compress js %}
+	<script src="/static/project_static/js/jquery.js"></script>
+	<script src="/static/project_static/js/snap.svg.js"></script>
+	<script src="/static/project_static/js/svg-pan-zoom.js"></script>
+	{% endcompress %}
 	{% block 'javascripts' %}{% endblock %}
 </body>
 </html>
