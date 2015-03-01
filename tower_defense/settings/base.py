@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'django_cron',
     'ws4redis',
+    'social.apps.django_app.default',
 
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -181,6 +182,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 WEBSOCKET_URL = '/ws/'
 WS4REDIS_EXPIRE = 7200
 WSGI_APPLICATION = 'ws4redis.django_runserver.application'
+
+# Social Auth
+SOCIAL_AUTH_FACEBOOK_KEY = '873132146076296'
+SOCIAL_AUTH_FACEBOOK_SECRET = '2c4b9ce98b025d8741521d8ec3afed39'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
