@@ -1,0 +1,56 @@
+body {
+	overflow: hidden;
+}
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+}
+
+.pure-menu {
+	padding: 10px 10px 10px 10px;
+}
+
+.right-menu-item {
+	position: relative;
+	left: -100px;
+	background-color: #add8e6;
+}
+
+.countdown {
+	position: absolute;
+	left: 50%;
+}
+
+.pure-menu-list {
+	text-align: center;
+}
+
+.static-menu-items:hover {
+	background-color: transparent;
+}
+
+.header {
+	background-color: #add8e6;
+}
+
+.pure-menu-children {
+	background-color: #add8e6;
+}
+
+.pure-menu-heading {
+	color: #ffffff;
+	font-weight: bold;
+}
+
+.pure-menu-link {
+	color: #ffffff;
+	font-weight: bold;
+}
+
+body {
+	background-color: #D2F0AD;
+}

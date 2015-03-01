@@ -7,13 +7,16 @@
 	<title>{% block 'title' %}Tower Defense{% endblock %}</title>
 	{% compress css %}
 	<link rel="stylesheet" type="text/css" href="/static/project_static/css/pure-min.css">
+	<link rel="stylesheet" type="text/css" href="/static/project_static/css/font-awesome.css">
 	{% endcompress %}
 	{% block 'stylesheets' %}{% endblock %}
 </head>
 <body>
+	{% block 'header' %}
+		{% include 'partials/header.html' %}
+	{% endblock %}
 	<main role="content">
-		{% block 'content' %}
-		{% endblock %}
+		{% block 'content' %}{% endblock %}
 	</main>
 
 	{% compress js %}

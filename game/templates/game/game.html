@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block 'stylesheets' %}
+<link type="text/css" rel="stylesheet" href="/static/game/css/style.css">
+{% endblock %}
+
 {% block 'content' %}
 <noscript id="board-json">
 {
@@ -37,4 +41,12 @@
 ]
 }
 </noscript>
+
+<svg id="board" width="0" height="0"></svg>
+{% endblock %}
+
+{% block 'javascripts' %}
+<script src="/static/game/js/board.js"></script>
+<script src="/static/game/js/tile.js"></script>
+<script src="/static/game/js/controls.js"></script>
 {% endblock %}
