@@ -34,14 +34,8 @@
     name: Castle
     class_name: castle
     max_hp: 50
-
-- model: game.tower
-  pk: 1
-  fields:
-    name: Castle
-    class_name: castle
-    max_hp: 50
     view_range: 20
+    damage: 0
 
 - model: game.tower
   pk: 2
@@ -50,11 +44,12 @@
     class_name: turret
     max_hp: 10
     view_range: 5
-    damage: 1
+    damage: 5
 
 - model: game.tower
   pk: 3
   fields:
     name: Watch Tower
+    class_name: watch_tower
     max_hp: 20
     view_range: 10

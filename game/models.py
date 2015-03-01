@@ -31,7 +31,7 @@ class Game(models.Model):
         monsters = Monster.objects.all()
 
         for i in range(0, enemy_count):
-            tile = edge_tiles[randint(0, edge_tiles.count())]
+            tile = edge_tiles[randint(0, edge_tiles.count() - 1)]
             gametile = tile.gametile_set.first()
             monster = monsters[randint(0, monsters.count() - 1)]
             tm = TileMonster(tile=gametile, monster=monster, hp=monster.max_hp)
@@ -52,6 +52,17 @@ class Game(models.Model):
 
                 tile.save()
                 game_tile = GameTile.objects.create(game=self, tile=tile)
+
+        # Add the castle on init
+        castle = Tower.objects.get(pk=1)
+        gt = self.tiles \
+                 .filter(x_coordinate=((self.width - 1) / 2)) \
+                 .get(y_coordinate=((self.width - 1) / 2)) \
+                 .gametile_set.get()
+
+        tt = TileTower.objects.create(tile=gt, tower=castle, hp=castle.max_hp,
+                                      view_range=castle.view_range)
+        tt.save()
 
 class GameTile(models.Model):
     game = models.ForeignKey('Game')

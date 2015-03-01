@@ -10,7 +10,7 @@ def index(request):
     return HttpResponse(template.render(context))
 
 def new(request):
-    game = Game.objects.create_game(10, 10)
+    game = Game.objects.create_game(11, 11)
     game.save()
     game.add_tiles()
 
@@ -23,12 +23,14 @@ def new(request):
 
 def resume(request, id):
     game = Game.objects.get(pk=id)
-    active_game_tiles = game.gametile_set.filter(monster__in=range(0, 15))
+    monsters = game.gametile_set.exclude(monster__isnull=True)
+    towers = game.gametile_set.exclude(tower__isnull=True)
 
     template = loader.get_template('game/game.html')
     context = RequestContext(request, {
         'game': game,
-        'game_tiles': active_game_tiles,
+        'monsters': monsters,
+        'towers': towers,
     })
 
     return HttpResponse(template.render(context))
