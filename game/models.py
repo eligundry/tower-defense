@@ -41,6 +41,9 @@ class Game(models.Model):
         monster_tiles = self.gametile_set.exclude(monster__isnull=True)
         tower_tiles = self.gametile_set.exclude(tower__isnull=True)
 
+        if monster_tiles.count() is 0:
+            return
+
         for monster in monster_tiles.all():
             monster_coors = monster.tile.coordinates()
             target_tile = None
@@ -100,8 +103,9 @@ class Game(models.Model):
                                   .filter(y_coordinate=monster_coors[1] + 1) \
                                   .first()
 
-            monster.tile = target_tile
-            monster.save()
+            if target_tile is not None:
+                monster.tile = target_tile
+                monster.save()
 
     def add_tiles(self):
         for y in range(0, self.height):

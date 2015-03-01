@@ -1,5 +1,6 @@
 {
 "time_start": "{{ game.time_start }}",
+"game_id": {{ game.id }},
 "width": {{ game.width }},
 "height": {{ game.height }},
 "towers": [

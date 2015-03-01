@@ -31,6 +31,7 @@ function Board() {
 	this.svg = Snap.select("#board");
 	this.board_group = this.svg.group();
 	this.svg_elm = $('#board');
+	this.game_id = this.data.game_id;
 	this.width = this.data.width;
 	this.height = this.data.height;
 	this.monsters = this.data.monster;
@@ -42,7 +43,21 @@ function Board() {
 	this.GenerateBoard();
 	this.RenderMonsters();
 	this.RenderTowers();
+	this.SetupWebSocket();
 }
+
+Board.prototype.SetupWebSocket = function() {
+	this.websocket = new WebSocket('ws://' + window.location.host + '/ws/game?subscribe-group=game_' + this.game_id);
+
+	this.websocket.onopen = function() {
+		console.log("Connected");
+	};
+
+	this.websocket.onmessage = function(msg) {
+		var data = JSON.parse(msg);
+		console.log(data);
+	};
+};
 
 Board.prototype.ResizeBoard = function(width, height) {
 	this.svg_elm.css({
