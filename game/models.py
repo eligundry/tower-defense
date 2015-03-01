@@ -41,6 +41,68 @@ class Game(models.Model):
         monster_tiles = self.gametile_set.exclude(monster__isnull=True)
         tower_tiles = self.gametile_set.exclude(tower__isnull=True)
 
+        for monster in monster_tiles.all():
+            monster_coors = monster.tile.coordinates()
+            target_tile = None
+            nearest_tower = None
+            direction = [False, False, False, False]
+
+            lowest_distance_to_tower = None
+            lowest_difference = None
+
+            for tower in tower_tiles.all():
+                tower_coors = tower.tile.coordinates()
+
+                difference = [
+                    monster_coors[0] - tower_coors[0],
+                    monster_coors[1] - tower_coors[1]
+                ]
+
+                total_distance_to_tower = abs(difference[0]) + abs(difference[1])
+
+                if (lowest_distance_to_tower is None) or \
+                        (lowest_distance_to_tower > total_distance_to_tower):
+                    lowest_distance_to_tower = total_distance_to_tower
+                    lowest_difference = difference
+                    nearest_tower = tower_coors
+
+            # Do direction
+            if nearest_tower[0] < monster_coors[0] and \
+               abs(lowest_difference[0]) > abs(lowest_difference [1]):
+                direction[3] = True # Left
+                target_tile = self.tiles \
+                                  .filter(y_coordinate=monster_coors[1]) \
+                                  .filter(x_coordinate=monster_coors[0] - 1) \
+                                  .first()
+
+            if nearest_tower[0] >= monster_coors[0] and \
+               abs(lowest_difference[0]) > abs(lowest_difference [1]):
+                direction[1] = True # Right
+                target_tile = self.tiles \
+                                  .filter(y_coordinate=monster_coors[1]) \
+                                  .filter(x_coordinate=monster_coors[0] + 1) \
+                                  .first()
+
+
+            if nearest_tower[1] < monster_coors[1] and \
+               abs(lowest_difference[0]) <= abs(lowest_difference [1]):
+                direction[0] = True # Up
+                target_tile = self.tiles \
+                                  .filter(x_coordinate=monster_coors[0]) \
+                                  .filter(y_coordinate=monster_coors[1] - 1) \
+                                  .first()
+
+            if nearest_tower[1] >= monster_coors[1] and \
+               abs(lowest_difference[0]) <= abs(lowest_difference [1]):
+                direction[2] = True # Down
+                target_tile = self.tiles \
+                                  .filter(x_coordinate=monster_coors[0]) \
+                                  .filter(y_coordinate=monster_coors[1] + 1) \
+                                  .first()
+
+            monster.tile = target_tile
+            monster.save()
+
     def add_tiles(self):
         for y in range(0, self.height):
             for x in range(0, self.width):
