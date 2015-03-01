@@ -180,6 +180,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # Redis Websockets
 WEBSOCKET_URL = '/ws/'
 WS4REDIS_EXPIRE = 7200
+WSGI_APPLICATION = 'ws4redis.django_runserver.application'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
