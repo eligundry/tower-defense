@@ -2,3 +2,4 @@
 /static
 *.pyc
 /tower_defense/settings/local.py
+*.db

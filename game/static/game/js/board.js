@@ -68,6 +68,17 @@ Board.prototype.RenderTowers = function() {
 			self.settings.towers.width,
 			self.settings.towers.height
 		);
+
+		tower.attr({
+			xpos: t.x,
+			ypos: t.y,
+			hp: t.hp,
+			max_hp: t.max_hp,
+			name: t.name,
+			onmouseover: "evt.target.setAttribute('opacity', '0.5');",
+			onmouseout: "evt.target.setAttribute('opacity','1)');",
+			onclick: "towerMenu(evt.target.attributes.xpos.value, evt.target.attributes.ypos.value, evt.target.attributes.hp.value, evt.target.attributes.max_hp.value, evt.target.attributes.name.value);"
+		});
 	});
 };
 
@@ -88,6 +99,17 @@ Board.prototype.RenderMonsters = function() {
 			self.settings.monsters.width,
 			self.settings.monsters.height
 		);
+
+		monster.attr({
+			xpos: m.x,
+			ypos: m.y,
+			hp: m.hp,
+			name: m.name,
+			max_hp: m.max_hp,
+			onmouseover: "evt.target.setAttribute('opacity', '0.5');",
+			onmouseout: "evt.target.setAttribute('opacity','1)');",
+			onclick: "monsterMenu(evt.target.attributes.xpos.value, evt.target.attributes.ypos.value, evt.target.attributes.hp.value, evt.target.attributes.max_hp.value, evt.target.attributes.name.value);"
+		});
 	});
 };
 
@@ -108,9 +130,11 @@ Board.prototype.GenerateBoard = function() {
 				id: x + ", " + y,
 				'data-x': x,
 				'data-y': y,
+				xpos: x,
+				ypos: y,
 				onmouseover: "evt.target.setAttribute('opacity', '0.5');",
 				onmouseout: "evt.target.setAttribute('opacity','1)');",
-				onclick: "tileMenu(this);"
+				onclick: "tileMenu(evt.target.attributes.xpos.value, evt.target.attributes.ypos.value);"
 			});
 
 			this.board_group.add(tile);
