@@ -37,17 +37,4 @@
 ]
 }
 </noscript>
-
-<div class="game-board" data-width="{{ game.width }}" data-height="{{ game.height }}">
-{% for t in game.tiles.all %}
-	{% if t.x_coordinate == 0 %}
-	<div class="game-board-row">
-	{% endif %}
-	<div data-cell="{{ t.cell }}" data-x="{{ t.x_coordinate }}" data-y="{{ t.y_coordinate }}">
-	</div>
-	{% if t.x_coordinate == game.width|add:"-1" %}
-	</div>
-	{% endif %}
-{% endfor %}
-</div>
 {% endblock %}
