@@ -1,5 +1,5 @@
 {
-"time_start": {{ game.time_start }},
+"time_start": "{{ game.time_start }}",
 "width": {{ game.width }},
 "height": {{ game.height }},
 "towers": [
