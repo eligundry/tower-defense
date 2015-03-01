@@ -2,22 +2,20 @@
 {% load compress %}
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>{% block 'title' %}Tower Defense{% endblock %}</title>
-		{% compress css %}
-		<link rel="stylesheet" type="text/less" href="/static/project_static/less/bootstrap/bootstrap.less" charset="utf-8" />
-		{% endcompress %}
-		{% block 'stylesheets' %}
+<head>
+	<meta charset="utf-8">
+	<title>{% block 'title' %}Tower Defense{% endblock %}</title>
+	{% compress css %}
+	<link rel="stylesheet" type="text/less" href="/static/project_static/less/bootstrap/bootstrap.less" charset="utf-8" />
+	{% endcompress %}
+	{% block 'stylesheets' %}{% endblock %}
+</head>
+<body>
+	<main role="content">
+		{% block 'content' %}
 		{% endblock %}
-	</head>
-	<body>
-		<main role="content">
-			{% block 'content' %}
-			{% endblock %}
-		</main>
+	</main>
 
-		{% block 'javascripts' %}
-		{% endblock %}
-	</body>
+	{% block 'javascripts' %}{% endblock %}
+</body>
 </html>
