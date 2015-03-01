@@ -38,7 +38,8 @@ class Game(models.Model):
             tm.save()
 
     def move_enemies(self):
-        pass
+        monster_tiles = self.gametile_set.exclude(monster__isnull=True)
+        tower_tiles = self.gametile_set.exclude(tower__isnull=True)
 
     def add_tiles(self):
         for y in range(0, self.height):
@@ -47,7 +48,9 @@ class Game(models.Model):
                 tile.y_coordinate = y
                 tile.x_coordinate = x
 
-                if y == 0 or y == self.height or x == 0 or x == self.width:
+                if (y == 0 or y == self.height - 1):
+                    tile.is_edge = True
+                elif (x == 0 or x == self.height - 1):
                     tile.is_edge = True
 
                 tile.save()
@@ -82,6 +85,9 @@ class Tile(models.Model):
 
     def cell(self):
         return (self.y_coordinate * 10) + self.x_coordinate
+
+    def coordinates(self):
+        return [self.x_coordinate, self.y_coordinate]
 
     class Meta:
         ordering = ['y_coordinate', 'x_coordinate']
