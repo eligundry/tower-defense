@@ -1,0 +1,35 @@
+{
+"time_start": {{ game.time_start }},
+"width": {{ game.width }},
+"height": {{ game.height }},
+"towers": [
+	{% for t in towers %}
+	{
+		"x": {{ t.tile.x_coordinate }},
+		"y": {{ t.tile.y_coordinate }},
+		"cell": {{ t.tile.cell }},
+		"name": "{{ t.tower.first.name }}",
+		"class": "{{ t.tower.first.class_name }}",
+		"hp": {{ t.tiletower_set.first.hp }},
+		"max_hp": {{ t.tower.first.max_hp }},
+		"view_range": {% if t.tiletower.first.view_range %}{{ t.tiletower.first.view_range }}{% else %}0{% endif %},
+		"damage": {% if t.tower.first.damage %}{{ t.tower.first.damage }}{% else %}0{% endif %}
+	}{% if not forloop.last %},{% endif %}
+	{% endfor %}
+],
+"monster": [
+	{% for m in monsters %}
+	{
+		"x": {{ m.tile.x_coordinate }},
+		"y": {{ m.tile.y_coordinate }},
+		"cell": {{ m.tile.cell }},
+		"name": "{{ m.monster.first.name }}",
+		"class": "{{ m.monster.first.class_name }}",
+		"hp": {{ m.tilemonster_set.first.hp }},
+		"max_hp": {{ m.monster.first.max_hp }},
+		"movement": {{ m.monster.first.movement_range }},
+		"damage": {{ m.monster.first.damage }}
+	}{% if not forloop.last %},{% endif %}
+	{% endfor %}
+]
+}
