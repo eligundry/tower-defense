@@ -12,6 +12,18 @@ function Board() {
 				'warrior': '/static/project_static/svg/Warrior.svg',
 				'brute': '/static/project_static/svg/Brute.svg'
 			}
+		},
+		towers: {
+			width: 100,
+			height: 100,
+			icons: {
+				'castle': '/static/project_static/svg/Castle.svg',
+				'lure': '/static/project_static/svg/Lure.svg',
+				'oil': '/static/project_static/svg/Oil.svg',
+				'turret': '/static/project_static/svg/Turret.svg',
+				'watchtower': '/static/project_static/svg/WatchTower.svg',
+				'mine': '/static/project_static/svg/Mine.svg'
+			}
 		}
 	};
 
@@ -28,7 +40,8 @@ function Board() {
 
 	this.ResizeBoard(window.innerWidth, window.innerHeight);
 	this.GenerateBoard();
-	this.RenderMonsters(this.enemies);
+	this.RenderMonsters();
+	this.RenderTowers();
 }
 
 Board.prototype.ResizeBoard = function(width, height) {
@@ -40,7 +53,21 @@ Board.prototype.ResizeBoard = function(width, height) {
 
 
 Board.prototype.RenderTowers = function() {
-	$.each(this.towers, function(i, e) {
+	var self = this;
+
+	$.each(this.towers, function(i, t) {
+		var target = $('[data-x="'+ t.x +'"][data-y="'+ t.y +'"]');
+		var x = Number(target.attr('x')),
+			y = Number(target.attr('y')),
+			icon = self.settings.towers.icons[t['class']];
+
+		var tower = self.board_group.g().image(
+			icon,
+			x,
+			y,
+			self.settings.towers.width,
+			self.settings.towers.height
+		);
 	});
 };
 
